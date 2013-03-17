@@ -52,22 +52,26 @@ namespace CSharp_XML1
 
         static void readXml()
         {
+            int i = 0;
             try
             {
                 XmlReader myXmlReader = XmlReader.Create("test.xml");
 
                 while (myXmlReader.Read())
                 {
+                    Console.WriteLine(i.ToString() + myXmlReader.Value);
                     if ((myXmlReader.NodeType == XmlNodeType.Element) && (myXmlReader.Name == "ChildElement"))
                     {
                         if (myXmlReader.HasAttributes)
                         {
                             //Console.WriteLine(myXmlReader.GetAttribute("currency") + ": " + myXmlReader.GetAttribute("rate"));
+                            //Console.WriteLine(myXmlReader.Value.ToString());
                         }
                         Console.WriteLine("ChildElement found!");
-                        Console.WriteLine(myXmlReader.Value.ToString());
+                        myXmlReader.Read();
+                        Console.WriteLine(myXmlReader.Value + "<- from Extra Read St");
                     }
-
+                    i++;
                 }
             }
             catch
@@ -75,15 +79,7 @@ namespace CSharp_XML1
                 Console.WriteLine("File not found!!");    
             }
 
-
-            
-
         }
-
-
-
-
-
 
     }
 }
